@@ -12,6 +12,7 @@ export interface Props {
   title?: string;
   /** @format textarea */
   description?: string;
+  descriptionPlacement?: "left" | "right" | "center" | "justify";
   tagline?: string;
   image?: ImageWidget;
   placement?: "left" | "right";
@@ -21,6 +22,13 @@ export interface Props {
     bottom?: boolean;
   };
 }
+
+const DESCRIPTION_PLACEMENT = {
+  left: "left",
+  right: "right",
+  center: "center",
+  justify: "justify",
+};
 
 const PLACEMENT = {
   left: "flex-col md:flex-row-reverse",
@@ -33,7 +41,8 @@ const DEFAULT_IMAGE =
 export default function ImageWithParagraph({
   title = "Here's an intermediate size heading you can edit",
   description =
-    "This text is fully editable and ready for your personal touch. Just click here, head over to the section window, or dive straight into the code to make changes as you see fit. Whether it's about the content, formatting, font, or anything in between, editing is just a click away.",
+  "This text is fully editable and ready for your personal touch. Just click here, head over to the section window, or dive straight into the code to make changes as you see fit. Whether it's about the content, formatting, font, or anything in between, editing is just a click away.",
+  descriptionPlacement = "left",
   tagline = "Tagline",
   image = DEFAULT_IMAGE,
   placement = "left",
@@ -46,11 +55,9 @@ export default function ImageWithParagraph({
   return (
     <div class="lg:container md:max-w-6xl lg:mx-auto mx-4 text-sm">
       <div
-        class={`flex ${
-          PLACEMENT[placement]
-        } gap-12 md:gap-20 text-left items-center z-10 ${
-          disableSpacing?.top ? "" : "pt-12 lg:pt-28"
-        } ${disableSpacing?.bottom ? "" : "pb-12 lg:pb-28"}`}
+        class={`flex ${PLACEMENT[placement]
+          } gap-12 md:gap-20 text-left items-center z-10 ${disableSpacing?.top ? "" : "pt-12 lg:pt-28"
+          } ${disableSpacing?.bottom ? "" : "pb-12 lg:pb-28"}`}
       >
         <div class="w-full md:w-1/2 border border-secondary rounded-lg overflow-hidden">
           <Image
@@ -71,7 +78,9 @@ export default function ImageWithParagraph({
           <p class="text-4xl leading-snug">
             {title}
           </p>
-          <p class="leading-normal">
+          <p class="leading-normal" style="text-align:${
+            des
+            }">
             {description}
           </p>
           <div class="flex gap-3 pt-4">

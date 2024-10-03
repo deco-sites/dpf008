@@ -27,7 +27,9 @@
           "href": "/historia",
           "style": "Ghost"
         }
-      ]
+      ],
+      "placement": "left",
+      "descriptionPlacement": "right"
     },
     {
       "__resolveType": "site/sections/ImageWithParagraph.tsx",
